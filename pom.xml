@@ -290,6 +290,7 @@
     <dropwizard.version>3.2.5</dropwizard.version>
     <spotbugsannotations.version>3.1.9</spotbugsannotations.version>
     <checkstyle.version>8.17</checkstyle.version>
+    <maven-bundle-plugin-version>4.1.0</maven-bundle-plugin-version>
   </properties>
 
   <dependencyManagement>
@@ -597,6 +598,11 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>${maven-bundle-plugin-version}</version>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -800,6 +806,35 @@
           </excludes>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <inherited>true</inherited>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+            <Export-Package>${osgi.export.package}</Export-Package>
+            <Import-Package>${osgi.import.package}</Import-Package>
+            <_removeheaders>
+              Include-Resource,
+              Private-Package,
+              Embed-Dependency,
+              Embed-Transitive
+            </_removeheaders>
+          </instructions>
+        </configuration>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
 
     <resources>
