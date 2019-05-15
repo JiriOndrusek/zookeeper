@@ -291,6 +291,9 @@
     <spotbugsannotations.version>3.1.9</spotbugsannotations.version>
     <checkstyle.version>8.17</checkstyle.version>
     <maven-bundle-plugin-version>4.1.0</maven-bundle-plugin-version>
+
+    <!-- OSGi -->
+    <osgi.doc.url>http://hadoop.apache.org/zookeeper</osgi.doc.url>
   </properties>
 
   <dependencyManagement>
@@ -816,6 +819,7 @@
             <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
             <Export-Package>${osgi.export.package}</Export-Package>
             <Import-Package>${osgi.import.package}</Import-Package>
+            <Bundle-DocURL>${osgi.doc.url}</Bundle-DocURL>
             <_removeheaders>
               Include-Resource,
               Private-Package,
